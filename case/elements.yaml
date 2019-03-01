@@ -1,0 +1,70 @@
+-
+  element_info: com.kaihei.baobao:id/et_phone
+  find_type: id
+  index: 0
+  operate_type: send_key
+  text: 手机号文本框
+  key: phone
+-
+  element_info: com.kaihei.baobao:id/et_code
+  find_type: id
+  index: 0
+  operate_type: send_key
+  text: 请输入验证码
+  key: code
+-
+  element_info: com.kaihei.baobao:id/btn_login
+  find_type: id
+  index: 0
+  operate_type: click
+  text: 登陆
+  key: login
+-
+  element_info: com.kaihei.baobao:id/tab_tv_label
+  find_type: id
+  index: 1
+  operate_type: click
+  text: 我的
+  key: my
+-
+  element_info: com.kaihei.baobao:id/iv_edit
+  find_type: id
+  index: 0
+  operate_type: click
+  text: 个人主页
+  key: homepage
+-
+  element_info: com.kaihei.baobao:id/iv_edit
+  find_type: id
+  index: 0
+  operate_type: click
+  text: 编辑资料
+  key: edit_info
+-
+  element_info: com.kaihei.baobao:id/tv_nickname
+  find_type: id
+  index: 0
+  operate_type: click
+  text: 昵称
+  key: nickname
+-
+  element_info: com.kaihei.baobao:id/et_nickname
+  find_type: id
+  index: 0
+  operate_type: send_key
+  text: 编辑昵称
+  key: edit_nickname
+-
+  element_info: com.kaihei.baobao:id/other_text
+  find_type: id
+  index: 0
+  operate_type: click
+  text: 保存
+  key: save_nickname
+-
+  element_info: com.kaihei.baobao:id/back_btn
+  find_type: id
+  index: 0
+  operate_type: click
+  text: 返回按钮
+  key: back_btn
