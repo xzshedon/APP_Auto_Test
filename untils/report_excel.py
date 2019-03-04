@@ -116,15 +116,17 @@ def create(file_name, test_time, test_version, devices_list):
         table1.write(1, 4, '结果', style=style3)
         table1.write(1, 5, '测试设备', style=style3)
         table1.write(1, 6, '原因', style=style3)
+        j = 0
         for i in range(len(all_result)):
             for item in all_result[i]:
-                table1.write(i + 2, 0, str(eval(item['parameter'])['id']), style=style3)
-                table1.write(i + 2, 1, str(eval(item['parameter'])['model']), style=style3)
-                table1.write(i + 2, 2, str(eval(item['parameter'])['case']), style=style3)
-                table1.write(i + 2, 3, str(eval(item['parameter'])['assert']), style=style3)
-                table1.write(i + 2, 4, str(item['result']), style=style3)
-                table1.write(i + 2, 5, str(item['device']), style=style3)
-                table1.write(i + 2, 6, str(item['reason']), style=style3)
+                table1.write(j+2, 0, str(eval(item['parameter'])['id']), style=style3)
+                table1.write(j+2, 1, str(eval(item['parameter'])['model']), style=style3)
+                table1.write(j+2, 2, str(eval(item['parameter'])['case']), style=style3)
+                table1.write(j+2, 3, str(eval(item['parameter'])['assert']), style=style3)
+                table1.write(j+2, 4, str(item['result']), style=style3)
+                table1.write(j+2, 5, str(item['device']), style=style3)
+                table1.write(j+2, 6, str(item['reason']), style=style3)
+                j += 1
         file.save(file_name)
         LOG.info("测试报告保存成功")
     except Exception as e:

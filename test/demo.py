@@ -87,27 +87,85 @@ PATH = lambda p : os.path.abspath(
 )
 
 
-# demo运行，需要现在控制台：appium &
+# demo运行，需要先在控制台：appium &
 
 class BaoBaoAndroidTest(unittest.TestCase):
     def setUp(self):
-        desired_caps = {}
-        desired_caps['platformName'] = 'Android'
-        desired_caps['platformVersion'] = '7.1.2'
-        desired_caps['deviceName'] = 'e811deb7'
-        desired_caps['appPackage'] = 'com.kaihei.baobao'
-        desired_caps['appActivity'] = '.core.welcome.WelcomeActivity'
-        desired_caps['noReset'] = True
-        desired_caps['automationName'] = 'uiautomator2'
-        self.driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
+        d1_caps = {}
+        d1_caps['platformName'] = 'Android'
+        d1_caps['platformVersion'] = '7.1.2'
+        d1_caps['deviceName'] = 'e811deb7'
+        d1_caps['appPackage'] = 'com.kaihei.baobao'
+        d1_caps['appActivity'] = '.core.welcome.WelcomeActivity'
+        d1_caps['noReset'] = True
+        d1_caps['automationName'] = 'uiautomator2'
+        self.driver1 = webdriver.Remote('http://127.0.0.1:4723/wd/hub', d1_caps)  # 暴鸡
+        d2_caps = {}
+        d2_caps['platformName'] = 'Android'
+        d2_caps['platformVersion'] = '5.1'
+        d2_caps['deviceName'] = 'S4NZ8LCIY5LNE6WS'
+        d2_caps['appPackage'] = 'com.kaihei.baobao'
+        d2_caps['appActivity'] = '.core.welcome.WelcomeActivity'
+        d2_caps['noReset'] = True
+        d2_caps['automationName'] = 'uiautomator2'
+        self.driver2 = webdriver.Remote('http://127.0.0.1:4723/wd/hub', d2_caps)  # 老板
         sleep(8)
 
     def tearDown(self):
-        self.driver.close_app()
-        self.driver.quit()
+        self.driver1.close_app()
+        self.driver1.quit()
+        self.driver2.close_app()
+        self.driver2.quit()
 
-    def test_add(self):
-        self.driver.find_elements_by_id('com.kaihei.baobao:id/tab_tv_label')[1].click()
+    # 测试用户评价
+    def test_user_evaluation(self):
+        # 点击我的
+        self.driver1.find_elements_by_id('com.kaihei.baobao:id/tab_tv_label')[1].click()
+        sleep(1)
+        # 点击个人主页
+        self.driver1.find_element_by_id('com.kaihei.baobao:id/iv_edit').click()
+        sleep(2)
+        # 向上滑动
+        self.driver1.swipe(0.5,0.8,0.5,0.2, duration=200)
+        # 点击用户印象
+        self.driver1.find_element_by_id('com.kaihei.baobao:id/tv_to_more_label').click()
+        sleep(2)
+        # 点击下拉菜单
+        self.driver1.find_element_by_id('com.kaihei.baobao:id/iv_label_arrow').click()
+        sleep(1)
+
+    # 测试车队上车
+    def test_car_board(self):
+        # 暴鸡：点击车队
+        self.driver1.find_elements_by_id('com.kaihei.baobao:id/tab_tv_label')[0].click()
+        sleep(2)
+        # 暴鸡：点击创建车队
+        self.driver1.find_element_by_id('com.kaihei.baobao:id/img_fleet_create').click()
+        sleep(2)
+        # 暴鸡：点击确定创建
+        self.driver1.find_element_by_id('com.kaihei.baobao:id/fleet_game_free_create').click()
+        sleep(2)
+        # 老板：点击车队
+        self.driver2.find_elements_by_id('com.kaihei.baobao:id/item_game_name')[0].click()
+        sleep(2)
+        # 老板：选择白银段位
+        self.driver2.find_element_by_name('秩序白银').click()
+        sleep(1)
+        # 老板：点击开始匹配
+        self.driver2.find_element_by_id('com.kaihei.baobao:id/fleet_game_free_times').click()
+        sleep(5)
+
+        assert_boss = self.driver1.find_element_by_name('哟不错呦')
+        boss = False
+        if assert_boss:
+            boss = True
+        assert_leader = self.driver2.find_element_by_name('sunny12')
+        leader = False
+        if assert_leader:
+            leader = True
+
+        self.assertTrue(boss, '暴鸡，没有找打老板')
+        self.assertTrue(leader, '老板，没有找到暴鸡')
 
 
 if __name__ == "__main__":
